@@ -4,6 +4,7 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -24,6 +25,10 @@ public class FluxTest {
         System.out.println("---------ALL EVENTS-----------");
         Flux.just(values).log().subscribe(data -> System.out.println(data));
 
+        StepVerifier.create(Flux.just("A","B"))
+                .expectNext("A")
+                .expectNext("B")
+                .verifyComplete();
     }
 
     @Test
