@@ -2,6 +2,7 @@ package org.exmaple.reactive.reactiveexmaplemodule.playground;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.jupiter.api.Test;
+import org.reactivestreams.Subscriber;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
@@ -71,6 +72,42 @@ public class FluxTest {
         System.out.println(Thread.currentThread().getName());
     }
 
+    @Test
+    public void fluxWithTakeOperatorTest() throws InterruptedException {
+        System.out.println(Thread.currentThread().getName());
+        Flux.interval(Duration.ofSeconds(1))
+                .fromIterable(Arrays.asList(values))
+                .log()
+                .take(3)//take 3 values & then cancel subscription
+                .subscribe(data-> {System.out.println(data+" by "+Thread.currentThread().getName());
+                });
+        Thread.sleep(10);
+        System.out.println("It will accept no of arguments & then will cancel the subscription");
+        System.out.println("Useful when you are testing");
+    }
+
+
+    @Test //this didn't work ,revisit this
+    public void fluxWithRequestTest() throws InterruptedException {
+
+        Thread.sleep(10);
+        System.out.println("It will accept no of arguments & then will cancel the subscription");
+
+
+    }
+    @Test //this didn't work ,revisit this
+    public void fluxWithErrorHandlingTest() throws InterruptedException {
+        //Thread.sleep(10);
+        Flux.just("SAURABH","GOVIND","NAIK")
+                .concatWith(Flux.error(new RuntimeException("SOMETHING FAILED")))
+                .log()
+                .onErrorReturn("SOMETHING WENT WRONG")
+
+                .subscribe(data-> System.out.println(data));
+       // System.out.println("here we handled errors so we will see onComplete method here");
+Thread.sleep(10000);
+
+    }
 
 
 }
