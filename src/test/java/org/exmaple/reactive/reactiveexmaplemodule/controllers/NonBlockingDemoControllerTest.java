@@ -40,6 +40,7 @@ class NonBlockingDemoControllerTest {
 
     @Test
     void getNumbersStream() {
+
         webTestClient
                 .get()
                 .uri(fluxNumberStreamURL)
