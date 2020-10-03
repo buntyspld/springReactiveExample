@@ -17,7 +17,6 @@ public class OperatorTest {
         StepVerifier.create(filteredCitiesFlux.log())
                 .expectNext("Kolkata")
                 .verifyComplete();
-
     }
 
     @Test
@@ -28,8 +27,6 @@ public class OperatorTest {
         StepVerifier.create(filteredCitiesFlux.log())
                 .expectNext("Pune")
                 .verifyComplete();
-        //  Flux<String> flux=Flux.fromIterable(cities);
-        // Flux<String> flux=Flux.fromIterable(cities);
-        //  Flux<String> flux=Flux.fromIterable(cities);
+
     }
 }
