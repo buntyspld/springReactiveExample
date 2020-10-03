@@ -21,4 +21,8 @@ public class NonBlockingDemoController {
     }
 
 
+    @GetMapping("/fluxNumbersDelayed")
+    public Flux<Integer> getNumbersDelayed(){
+        return Flux.range(1,10).log().delayElements(Duration.ofSeconds(1));
+    }
 }
